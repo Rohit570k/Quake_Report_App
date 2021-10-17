@@ -13,5 +13,31 @@
         android:key="@string/settings_min_magnitude_key"
         android:selectAllOnFocus="true"
         android:title="@string/settings_min_magnitude_label" />
+    <PreferenceCategory
+        android:title="FILTER">
+        <CheckBoxPreference
+            android:defaultValue="@string/settings_checkbox_default"
+            android:summaryOff="Starttime and Endtime disabled"
+            android:summaryOn="Starttime and Endtime enabled"
+            android:title="@string/settings_checkbox_label"
+            android:key="@string/settings_checkbox_key"
+            />
+        <EditTextPreference
+            android:defaultValue="@string/settings_starttime_dafault"
+            android:inputType="date"
+            android:key="@string/settings_starttime_key"
+            android:selectAllOnFocus="true"
+            android:title="@string/settings_starttime_label"
+            android:enabled="false"/>
+        <EditTextPreference
+            android:defaultValue="@string/settings_endtime_dafault"
+            android:inputType="date"
+            android:key="@string/settings_endtime_key"
+            android:selectAllOnFocus="true"
+            android:title="@string/settings_endtime_label"
+            android:enabled="false"/>
+    </PreferenceCategory>
+
+
 
 </PreferenceScreen>

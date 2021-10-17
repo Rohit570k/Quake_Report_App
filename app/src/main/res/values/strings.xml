@@ -36,4 +36,23 @@
     <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_most_recent_label">Most Recent</string>
     <string name="settings_order_by_most_recent_value" translatable="false">time</string>
+
+    <!-- SET DATE CHECKBOX-->
+    <!-- String for set date checkbox prefernces -->
+    <string name="settings_checkbox_label">Set Date</string>
+    <string name="settings_checkbox_key" translatable="false">set_date</string>
+    <string name="settings_checkbox_default" translatable="false">false</string>
+
+    <!--START TIME-->
+    <!--String for satrttime prefernces-->
+    <string name="settings_starttime_label" translatable="false">Start Time</string>
+    <string name="settings_starttime_key" translatable="false">start_time</string>
+    <string name="settings_starttime_dafault" translatable="false">1964-01-01</string>
+
+    <!--END TIME-->
+    <!--String for endtime prefernces-->
+    <string name="settings_endtime_label" translatable="false">End Time</string>
+    <string name="settings_endtime_key" translatable="false">end_time</string>
+    <string name="settings_endtime_dafault" translatable="false">1964-10-01</string>
+
 </resources>

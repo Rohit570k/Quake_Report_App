@@ -138,6 +138,18 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default)
         );
+        String starttime =sharedPrefs.getString(
+                getString(R.string.settings_starttime_key),
+                getString(R.string.settings_starttime_dafault)
+        );
+        String endtime =sharedPrefs.getString(
+                getString(R.string.settings_endtime_key),
+                getString(R.string.settings_endtime_dafault)
+        );
+        Boolean setDate_checkbox =sharedPrefs.getBoolean(
+                getString(R.string.settings_checkbox_key),
+                false
+        );
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         //Constructing Desired url with custom mimimum maximum
@@ -145,7 +157,10 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
         uriBuilder.appendQueryParameter("limit", "10000");
         uriBuilder.appendQueryParameter("minmag", minMagnitude);
         uriBuilder.appendQueryParameter("orderby", orderBy);
-
+        if(setDate_checkbox) {
+            uriBuilder.appendQueryParameter("starttime", starttime);
+            uriBuilder.appendQueryParameter("endtime", endtime);
+        }
         return new EarthquakeLoader(this, uriBuilder.toString());
     }
 
