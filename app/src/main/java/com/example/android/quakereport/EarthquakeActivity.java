@@ -17,6 +17,7 @@ package com.example.android.quakereport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +49,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     /** URL for earthquake data from the USGS dataset */
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
     /** Adapter for the list of earthquakes */
     private EarthquakeAdapter mAdapter;
@@ -127,8 +129,20 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int id, Bundle args) {
         Log.i(LOG_TAG,"TEST: Callback onCreateLoader() called");
-        // Create a new loader for the given URL
-        return new EarthquakeLoader(this, USGS_REQUEST_URL);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //Getting the current prefernces value
+        String minMagnitude = sharedPrefs.getString(
+                getString(R.string.settings_min_magnitude_key),
+                getString(R.string.settings_min_magnitude_default));
+        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        //Constructing Desired url with custom mimimum maximum
+        uriBuilder.appendQueryParameter("format", "geojson");
+        uriBuilder.appendQueryParameter("limit", "10000");
+        uriBuilder.appendQueryParameter("minmag", minMagnitude);
+        uriBuilder.appendQueryParameter("orderby", "time");
+
+        return new EarthquakeLoader(this, uriBuilder.toString());
     }
 
     @Override
